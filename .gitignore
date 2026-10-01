@@ -1,0 +1,17 @@
+# Node / Vite
+node_modules/
+dist/
+coverage/
+*.log
+
+# .NET
+bin/
+obj/
+TestResults/
+
+# Editors / OS
+.vs/
+.vscode/
+.idea/
+.DS_Store
+*.tsbuildinfo

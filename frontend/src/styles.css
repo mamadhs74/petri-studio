@@ -1,0 +1,380 @@
+/* Design tokens. Places and transitions get their own hues so the canvas reads at a glance. */
+:root {
+  --paper: #f3f5f7;
+  --surface: #ffffff;
+  --ink: #18222e;
+  --ink-soft: #4a5868;
+  --rule: #d5dbe2;
+  --place: #0b6e69;
+  --place-fill: #e3f1f0;
+  --transition: #2f3e9e;
+  --focus: #2f3e9e;
+  --danger: #b42318;
+
+  --radius-control: 6px;
+  --radius-panel: 10px;
+  --space: 1rem;
+  --font: 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #10161d;
+    --surface: #18212b;
+    --ink: #e6ebf0;
+    --ink-soft: #a3b0bd;
+    --rule: #2c3845;
+    --place: #4fc4bc;
+    --place-fill: #123533;
+    --transition: #9aa8ff;
+    --focus: #9aa8ff;
+    --danger: #ff8a7a;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 16px/1.5 var(--font);
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+  margin: 0 0 0.75rem;
+}
+h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+h2 {
+  font-size: 1.05rem;
+  font-weight: 650;
+}
+h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-top: 1.25rem;
+}
+
+.muted {
+  color: var(--ink-soft);
+}
+.small {
+  font-size: 0.875rem;
+}
+.number {
+  font-variant-numeric: tabular-nums;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* Layout */
+.topbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1.5rem;
+  padding: 1rem clamp(1rem, 3vw, 2rem);
+  border-bottom: 1px solid var(--rule);
+  background: var(--surface);
+}
+.topbar h1 {
+  margin: 0;
+}
+.tagline {
+  margin: 0;
+  color: var(--ink-soft);
+  flex: 1 1 20rem;
+}
+.topbar-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 22rem;
+  gap: var(--space);
+  padding: var(--space) clamp(1rem, 3vw, 2rem) 3rem;
+  max-width: 90rem;
+  margin: 0 auto;
+}
+.workspace {
+  display: grid;
+  gap: var(--space);
+  align-content: start;
+  min-width: 0;
+}
+.sidebar {
+  display: grid;
+  gap: var(--space);
+  align-content: start;
+}
+
+@media (max-width: 960px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-panel);
+  padding: 1rem 1.1rem;
+}
+
+/* Canvas */
+.canvas {
+  margin: 0;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-panel);
+  overflow: hidden;
+}
+.canvas svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  touch-action: none; /* lets touch users drag nodes instead of scrolling */
+  background-image: radial-gradient(var(--rule) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+.hint {
+  padding: 0.5rem 0.9rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.arc line {
+  stroke: var(--ink-soft);
+  stroke-width: 1.6;
+}
+.arrowhead {
+  fill: var(--ink-soft);
+}
+.arc-weight {
+  fill: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.node {
+  cursor: grab;
+}
+.node:active {
+  cursor: grabbing;
+}
+.node:focus {
+  outline: none;
+}
+.node-place .shape {
+  fill: var(--place-fill);
+  stroke: var(--place);
+  stroke-width: 2.5;
+}
+.node-transition .shape {
+  fill: var(--transition);
+}
+.node.is-selected .shape,
+.node:focus-visible .shape {
+  stroke: var(--focus);
+  stroke-width: 4;
+  paint-order: stroke;
+}
+.token {
+  fill: var(--ink);
+}
+.token-count {
+  fill: var(--ink);
+  font-size: 15px;
+  font-weight: 700;
+}
+.node-label {
+  fill: var(--ink);
+  font-size: 13px;
+}
+.node-rate {
+  fill: var(--transition);
+  font-size: 12px;
+}
+
+/* Forms */
+.field {
+  display: grid;
+  gap: 0.25rem;
+  margin-bottom: 0.75rem;
+}
+.field-narrow input {
+  max-width: 7rem;
+}
+label,
+legend {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+fieldset {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-control);
+  padding: 0.75rem;
+  margin: 0 0 0.75rem;
+}
+input,
+select {
+  font: inherit;
+  color: inherit;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-control);
+  padding: 0.45rem 0.6rem;
+  min-height: 2.5rem; /* comfortable touch target */
+  width: 100%;
+}
+.inline-form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.25rem 0.5rem;
+  margin-bottom: 0.75rem;
+}
+.inline-form label {
+  grid-column: 1 / -1;
+}
+
+button {
+  font: inherit;
+  min-height: 2.5rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--radius-control);
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--surface);
+  cursor: pointer;
+}
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.button-primary {
+  width: 100%;
+  background: var(--transition);
+  border-color: var(--transition);
+  color: #fff;
+  font-weight: 600;
+}
+.button-quiet {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--rule);
+}
+.button-quiet.danger {
+  color: var(--danger);
+}
+
+.arc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.arc-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.problems {
+  color: var(--danger);
+  padding-left: 1.1rem;
+  font-size: 0.9rem;
+}
+.status:empty {
+  display: none;
+}
+.error {
+  color: var(--danger);
+  background: var(--surface);
+  border: 1px solid var(--danger);
+  border-radius: var(--radius-panel);
+  padding: 0.75rem 1rem;
+}
+
+/* Results */
+.results figure {
+  margin: 0;
+}
+.estimate {
+  font-size: 1.05rem;
+  max-width: 70ch;
+}
+.chart {
+  width: 100%;
+  height: auto;
+}
+.gridline {
+  stroke: var(--rule);
+}
+.tick {
+  fill: var(--ink-soft);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 1rem;
+  font-size: 0.9rem;
+}
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+figcaption {
+  font-size: 0.875rem;
+  color: var(--ink-soft);
+}
+.table-scroll {
+  overflow-x: auto;
+}
+table {
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+  margin-top: 0.5rem;
+}
+th,
+td {
+  padding: 0.3rem 0.75rem;
+  text-align: right;
+  border-bottom: 1px solid var(--rule);
+}
+thead th {
+  text-align: right;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

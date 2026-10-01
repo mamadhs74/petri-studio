@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetriStudio.Api", "PetriStudio.Api\PetriStudio.Api.csproj", "{5749F749-9AB7-403F-97AB-3DBEEC25137A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetriStudio.Tests", "PetriStudio.Tests\PetriStudio.Tests.csproj", "{1551BF9F-3E0E-45D2-96C6-396F8AC72D2C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5749F749-9AB7-403F-97AB-3DBEEC25137A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5749F749-9AB7-403F-97AB-3DBEEC25137A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5749F749-9AB7-403F-97AB-3DBEEC25137A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5749F749-9AB7-403F-97AB-3DBEEC25137A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1551BF9F-3E0E-45D2-96C6-396F8AC72D2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1551BF9F-3E0E-45D2-96C6-396F8AC72D2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1551BF9F-3E0E-45D2-96C6-396F8AC72D2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1551BF9F-3E0E-45D2-96C6-396F8AC72D2C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
